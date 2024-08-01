@@ -16,7 +16,10 @@ public class Calculator implements ActionListener {
 	double num1 = 0, num2 = 0, result = 0;
 	char operator;
 
-	
+	/* Mudanças desde a primeira versão: 
+	- cor do panel background e do contentPane background settada para GRAY
+	- Alinhamento do textField settado para a direita
+	*/
 	Calculator() {
 		frame = new JFrame("Calculator");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -26,6 +29,7 @@ public class Calculator implements ActionListener {
 		textField = new JTextField();
 		textField.setBounds(50, 25, 300, 50);
 		textField.setFont(myFont);
+		textField.setHorizontalAlignment(JTextField.RIGHT);
 		textField.setEditable(false);
 
 		addButton = new JButton("+");
@@ -61,13 +65,14 @@ public class Calculator implements ActionListener {
 			numberButtons[i].setFocusable(false);
 		}
 
-		negButton.setBounds(50, 430, 100, 50);
-		delButton.setBounds(150, 430, 100, 50);
-		clrButton.setBounds(250, 430, 100, 50);
-		
+		negButton.setBounds(50, 430, 90, 50);
+		delButton.setBounds(155, 430, 90, 50);
+		clrButton.setBounds(260, 430, 90, 50);
+
 		panel = new JPanel();
 		panel.setBounds(50, 100, 300, 300);
 		panel.setLayout(new GridLayout(4, 4, 10, 10));
+		panel.setBackground(Color.GRAY);
 
 		panel.add(numberButtons[1]);
 		panel.add(numberButtons[2]);
@@ -86,6 +91,7 @@ public class Calculator implements ActionListener {
 		panel.add(equButton);
 		panel.add(addButton);
 
+		frame.getContentPane().setBackground(Color.GRAY);
 		frame.add(panel);
 		frame.add(negButton);
 		frame.add(delButton);
@@ -169,11 +175,11 @@ public class Calculator implements ActionListener {
 			String string = textField.getText();
 			textField.setText("");
 			for (int i = 0; i < string.length() - 1; i++) {
-				textField.setText(textField.getText()+string.charAt(i));
+				textField.setText(textField.getText() + string.charAt(i));
 
 			}
 		}
-		
+
 		if (e.getSource() == negButton) {
 			double temp = Double.parseDouble(textField.getText());
 			temp *= -1;
