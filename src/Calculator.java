@@ -14,12 +14,16 @@ public class Calculator implements ActionListener {
 	Font myFont = new Font("Arial", Font.BOLD, 30);
 
 	double num1 = 0, num2 = 0, result = 0;
+	
 	char operator;
 
-	/* Mudanças desde a primeira versão: 
-	- cor do panel background e do contentPane background settada para GRAY
-	- Alinhamento do textField settado para a direita
-	*/
+	/*
+	 * Mudanças desde a primeira versão: 
+	 * - cor do panel background e do contentPane background settada para GRAY 
+	 * - Alinhamento do textField settado para a direita
+	 * 
+	 * - Tratamento inicial de divisão por zero
+	 */
 	Calculator() {
 		frame = new JFrame("Calculator");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -159,12 +163,19 @@ public class Calculator implements ActionListener {
 				result = num1 * num2;
 				break;
 			case '/':
+				if(num2 == 0.0 ) {
+					JOptionPane.showMessageDialog(frame, "impossible division", "alerta!", JOptionPane.WARNING_MESSAGE);
+					textField.setText("");
+					result = 0;
+					break;
+				}
 				result = num1 / num2;
 				break;
 			}
 
 			textField.setText(String.valueOf(result));
 			num1 = result;
+		
 		}
 
 		if (e.getSource() == clrButton) {
